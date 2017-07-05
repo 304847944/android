@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.media">
+
+    <!-- 录音 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- SD卡 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 联系人 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <!-- 短信 -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <!-- 通话记录 -->
+    <uses-permission android:name="android.permission.READ_CALL_LOG"/>
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG"/>
+    <!-- 读取电话状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:name=".MainApplication">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".GalleryActivity" />
+        <activity android:name=".RecyclerViewActivity" />
+        <activity android:name=".ImageSwitcherActivity" />
+        <activity android:name=".CardViewActivity" />
+        <activity android:name=".AlbumActivity" />
+        <activity android:name=".VideoViewActivity" />
+        <activity android:name=".VideoControllerActivity" />
+        <activity android:name=".MediaControllerActivity" />
+        <activity android:name=".MoviePlayerActivity" 
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="sensor"
+            android:theme="@style/FullScreenTheme" />
+        <activity android:name=".RingtoneActivity" />
+        <activity android:name=".SoundPoolActivity" />
+        <activity android:name=".AudioTrackActivity" />
+        <activity android:name=".ContentProviderActivity" />
+        <activity android:name=".ContentResolverActivity" />
+        <activity android:name=".ContentObserverActivity" />
+        <activity android:name=".SpannableActivity" />
+        <activity android:name=".HtmlActivity" />
+        <activity android:name=".MusicPlayerActivity" />
+        <activity android:name=".MusicDetailActivity" />
+        
+        <provider
+            android:name=".provider.UserInfoProvider"
+            android:authorities="com.example.media.provider.UserInfoProvider"
+            android:enabled="true"
+            android:exported="true" />
+        
+        <service android:name=".service.MusicService" android:enabled="true" />
+        
+    </application>
+
+</manifest>
