@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        applicationId "com.example.mixture"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+//        ndk {
+//            moduleName "jni_mix"
+//            //platformVersion = 19  //最新的Android Studio已经不支持platformVersion
+//            cFlags "-fexceptions"
+//            ldLibs "log", "z", "m"
+//            stl "stlport_static"
+//            abiFilters "armeabi", "armeabi-v7a", "x86"
+//        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //Android Studio 2.2之后才引入externalNativeBuild
+    externalNativeBuild {
+        ndkBuild {
+            path "src/main/jni/Android.mk"
+//            path file("src\\main\\jni\\Android.mk")
+        }
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:25.1.0'
+}
