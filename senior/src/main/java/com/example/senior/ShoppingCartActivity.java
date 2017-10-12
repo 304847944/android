@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -239,7 +240,14 @@ public class ShoppingCartActivity extends Activity implements
 	
 	//模拟网络数据，初始化数据库中的商品信息
 	public static void downloadGoods(Context ctx, String isFirst, GoodsDBHelper helper) {
-		String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
+		//String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
+		String path = "";
+		//Android7.0之后默认关闭App的SD卡权限，所以对于7.0以上系统把存储路径改为App安装路径的data目录下
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+			path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
+		} else {
+			path = MainApplication.getInstance().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString() + "/";
+		}
 		if (isFirst.equals("true")) {
 			ArrayList<GoodsInfo> goodsList = GoodsInfo.getDefaultList();
 			for (int i=0; i<goodsList.size(); i++) {
