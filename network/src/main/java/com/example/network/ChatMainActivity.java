@@ -337,7 +337,7 @@ public class ChatMainActivity extends AppCompatActivity implements
 			Cursor cursor = mDownloadManager.query(down_query);
 			if (cursor.moveToFirst()) {
 				for (;; cursor.moveToNext()) {
-					int nameIdx = cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME);
+					int nameIdx = cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI);
 					int totalSizeIdx = cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
 					int nowSizeIdx = cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR);
 					int progress = (int) (100 * cursor.getLong(nowSizeIdx) / cursor.getLong(totalSizeIdx));

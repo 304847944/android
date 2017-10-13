@@ -10,6 +10,7 @@ import android.app.DownloadManager.Request;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -114,18 +115,26 @@ public class DownloadImageActivity extends AppCompatActivity {
 			if (cursor.moveToFirst()) {
 				for (;; cursor.moveToNext()) {
 					int nameIdx = cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME);
+					int uriIdx = cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI);
 					int mediaTypeIdx = cursor.getColumnIndex(DownloadManager.COLUMN_MEDIA_TYPE);
 					int totalSizeIdx = cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
 					int nowSizeIdx = cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR);
 					int statusIdx = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
 					int progress = (int) (100 * cursor.getLong(nowSizeIdx) / cursor.getLong(totalSizeIdx));
-					if (cursor.getString(nameIdx) == null) {
+					if (cursor.getString(uriIdx) == null) {
 						break;
 					}
 					tpc_progress.setProgress(progress, 100);
-					mImagePath = cursor.getString(nameIdx);
+					//Android7.0之后提示COLUMN_LOCAL_FILENAME已废弃
+					if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+						mImagePath = cursor.getString(nameIdx);
+					} else {
+						//所以7.0之后要先获取文件的Uri，再根据Uri获取文件路径
+						String fileUri = cursor.getString(uriIdx);
+						mImagePath = Uri.parse(fileUri).getPath();
+					}
 					String desc = "";
-					desc = String.format("%s文件路径：%s\n", desc, cursor.getString(nameIdx));
+					desc = String.format("%s文件路径：%s\n", desc, mImagePath);
 					desc = String.format("%s媒体类型：%s\n", desc, cursor.getString(mediaTypeIdx));
 					desc = String.format("%s文件总大小：%d\n", desc, cursor.getLong(totalSizeIdx));
 					desc = String.format("%s已下载大小：%d\n", desc, cursor.getLong(nowSizeIdx));
