@@ -90,6 +90,8 @@ public class ListViewActivity extends AppCompatActivity {
 				lv_planet.setFooterDividersEnabled(true);
 				lv_planet.setHeaderDividersEnabled(true);
 			} else if (arg2 == 7) {
+				lv_planet.setDivider(null);
+				lv_planet.setDividerHeight(dividerHeight);
 				lv_planet.setPadding(0, dividerHeight, 0, dividerHeight);
 				lv_planet.setBackgroundDrawable(drawable);
 			}
