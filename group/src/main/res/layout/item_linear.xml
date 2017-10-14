@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
@@ -13,7 +14,6 @@
         android:scaleType="fitCenter" />
 
     <LinearLayout
-        android:id="@+id/ll_item"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="7"
