@@ -38,7 +38,6 @@
         <activity android:name=".WebLocalActivity" />
         <activity android:name=".WebSpanActivity" />
         <activity android:name=".WebBrowserActivity" />
-        <activity android:name=".WebScriptActivity" />
         <activity android:name=".JniCpuActivity" />
         <activity android:name=".JniSecretActivity" />
         <activity android:name=".WifiInfoActivity" />
